@@ -93,6 +93,8 @@ jobs:
         script: |
           # Переходим в директорию проекта
           cd $HOME
+         # Распаковываем новые файлы
+          tar -xzf deploy-files.tar.gz
           
           # Получаем последний образ из реестра
           docker pull ${{ env.DOCKER_HUB_URL }}/${{ env.IMAGE_NAME }}:main

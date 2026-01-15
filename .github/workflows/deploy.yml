@@ -36,12 +36,12 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4
       with:
-        images: ${{ vars.DOCKER_HUB_URL }}/${{ vars.IMAGE_NAME }}
+        images: ${{ vars.DOCKER_HUB_URL }}/${{ github.repository }}
         tags: |
           type=ref,event=branch
           type=ref,event=pr
           type=semver,pattern={{version}}
-          type=sha,prefix={{branch}}-
+          type=sha,prefix=${{ github.ref_name }}-${{ github.run_number }}-
     
     - name: Build and push Docker image
       uses: docker/build-push-action@v5

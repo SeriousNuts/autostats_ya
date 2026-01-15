@@ -24,15 +24,15 @@ jobs:
     - name: Log in to GitHub Container DOCKER_HUB_URL
       uses: docker/login-action@v2
       with:
-        DOCKER_HUB_URL: ${{ env.DOCKER_HUB_URL }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        DOCKER_HUB_URL: ${{ var.DOCKER_HUB_URL }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
     
     - name: Extract metadata for Docker
       id: meta
       uses: docker/metadata-action@v4
       with:
-        images: ${{ env.DOCKER_HUB_URL }}/${{ env.IMAGE_NAME }}
+        images: ${{ var.DOCKER_HUB_URL }}/${{ var.IMAGE_NAME }}
         tags: |
           type=ref,event=branch
           type=ref,event=pr

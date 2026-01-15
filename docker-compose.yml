@@ -1,0 +1,25 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  yandex-stats-bot:
+    build: .
+    container_name: yandex-stats-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./reports:/app/reports
+      - ./logs:/app/logs
+    environment:
+      - TZ=Europe/Moscow
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; print('Health check passed')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

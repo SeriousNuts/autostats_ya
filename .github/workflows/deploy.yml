@@ -37,7 +37,7 @@ jobs:
       uses: docker/metadata-action@v4
       with:
         images: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/autostats_ya
+          ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.PROJECT_NAME }}
         tags: |
           type=ref,event=branch
           type=sha,prefix=${{ github.ref_name }}-${{ github.run_number }}-
@@ -98,7 +98,7 @@ jobs:
           tar -xzf deploy-files.tar.gz
           
           # Получаем последний образ из реестра
-          docker pull ${{ vars.DOCKER_HUB_URL }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.PROJECT_NAME }}:latest
           
           # Останавливаем текущий контейнер
           docker-compose down || true

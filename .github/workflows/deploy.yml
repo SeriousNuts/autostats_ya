@@ -109,6 +109,3 @@ jobs:
           # Проверяем статус контейнера
           echo "Deployment completed!"
           docker ps --filter "name=yandex-stats-bot" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-          
-          # Сохраняем лог деплоя
-          echo "$(date): Deployed commit ${{ github.sha }}" >> /var/log/deployments.log

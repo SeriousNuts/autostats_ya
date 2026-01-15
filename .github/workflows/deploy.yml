@@ -7,10 +7,6 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-  DOCKER_IMAGE_NAME: yandex-stats-bot
-  DOCKER_HUB_URL: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
 
@@ -19,7 +15,15 @@ jobs:
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     
     steps:
-    - uses: actions/checkout@v4
+    - name: Get build number
+      id: vars
+      run: echo ${{ github.ref_name }}-${{ github.run_number }}
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
     
     - name: Log in to GitHub Container DOCKER_HUB_URL
       uses: docker/login-action@v2

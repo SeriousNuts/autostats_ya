@@ -91,9 +91,10 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
+          set -e
           # Переходим в директорию проекта
           cd $HOME
-         # Распаковываем новые файлы
+          # Распаковываем новые файлы
           tar -xzf deploy-files.tar.gz
           
           # Получаем последний образ из реестра

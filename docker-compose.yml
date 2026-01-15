@@ -3,9 +3,9 @@ version: '3.8'
 
 services:
   yandex-stats-bot:
-    build: .
     container_name: yandex-stats-bot
     restart: unless-stopped
+    image: seriousnuts/autostats_ya:latest
     env_file:
       - .env
     volumes:

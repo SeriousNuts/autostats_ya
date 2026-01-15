@@ -55,7 +55,7 @@ jobs:
 
   deplyement_files_delivery:
     runs-on: ubuntu-latest
-    needs: build_docker
+    needs: build-and-push
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -78,7 +78,7 @@ jobs:
           strip_components: 0
 
   deploy:
-    needs: build-and-push
+    needs: deplyement_files_delivery
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     

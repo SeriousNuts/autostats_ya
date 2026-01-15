@@ -92,7 +92,7 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           # Переходим в директорию проекта
-          cd ~/yandex-stats-bot
+          cd ~/${{ secrets.SSH_USERNAME }}
           
           # Получаем последний образ из реестра
           docker pull ${{ env.DOCKER_HUB_URL }}/${{ env.IMAGE_NAME }}:main

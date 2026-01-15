@@ -8,6 +8,11 @@ from aiogram.client.default import DefaultBotProperties
 from telegram.bot import router
 from setup_logging import setup_logging
 
+
+async def delete_webhook(bot: Bot):
+    """Удаление webhook (для переключения на polling)"""
+    await bot.delete_webhook()
+
 def set_bot(bot: Bot):
     global bot_instance
     bot_instance = bot
@@ -22,8 +27,7 @@ async def start_bot_polling() -> None:
     """Запуск бота в режиме polling"""
     bot, dp = init_bot()
     dp.include_router(router)
-
-
+    await delete_webhook(bot)
     set_bot(bot)
     logging.info("===telegram bot started in POLLING mode===")
     await dp.start_polling(bot, skip_updates=False)

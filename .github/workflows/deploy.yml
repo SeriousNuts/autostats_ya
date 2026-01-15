@@ -92,7 +92,7 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           # Переходим в директорию проекта
-          cd ~/${{ secrets.SSH_USERNAME }}
+          cd $HOME
           
           # Получаем последний образ из реестра
           docker pull ${{ env.DOCKER_HUB_URL }}/${{ env.IMAGE_NAME }}:main

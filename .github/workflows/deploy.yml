@@ -53,6 +53,30 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
+  deplyement_files_delivery:
+    runs-on: ubuntu-latest
+    needs: build_docker
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Prepare deployment files
+        run: |
+          # Создаем архив с необходимыми файлами
+          tar -czf deploy-files.tar.gz \
+            docker-compose.yml \
+
+      - name: Deliver deploy file
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "deploy-files.tar.gz"
+          target: "/home/autostats"
+
+          strip_components: 0
+
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest

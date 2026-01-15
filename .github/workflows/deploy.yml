@@ -24,7 +24,7 @@ jobs:
     - name: Log in to GitHub Container DOCKER_HUB_URL
       uses: docker/login-action@v2
       with:
-        DOCKER_HUB_URL: ${{ var.DOCKER_HUB_URL }}
+        DOCKER_HUB_URL: ${{ vars.DOCKER_HUB_URL }}
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     
@@ -32,7 +32,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4
       with:
-        images: ${{ var.DOCKER_HUB_URL }}/${{ var.IMAGE_NAME }}
+        images: ${{ vars.DOCKER_HUB_URL }}/${{ vars.IMAGE_NAME }}
         tags: |
           type=ref,event=branch
           type=ref,event=pr

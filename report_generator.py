@@ -64,13 +64,14 @@ def create_correct_yandex_url_v2():
     return f"{base_url}?{query_string}"
 
 
-def save_json_to_excel(json_data, filename=datetime.now().strftime("%Y%m%d-%H%M%S") + ".xlsx"):
+def save_json_to_excel(json_data):
     """
        Создает Excel-таблицу из JSON с автоматическим добавлением строки "Итого"
        для числовых полей.
        """
 
     # Если данные переданы как строка, преобразуем в словарь
+    filename = datetime.now().strftime("%Y%m%d-%H%M%S") + ".xlsx"
     if isinstance(json_data, str):
         data = json.loads(json_data)
     else:

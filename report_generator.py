@@ -54,7 +54,7 @@ def create_correct_yandex_url_v2():
         ("pretty", "1"),
         ("stat_type", "main"),
         ("timezone", "Europe/Moscow"),
-        ("period", "7days"),
+        ("period", "30days"),
         ("limits", '{"offset":0,"limit":500}'),
     ]
 
